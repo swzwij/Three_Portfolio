@@ -16,6 +16,9 @@ export function init()
     addLight(scene);
 
     const cube = addCube(scene);
+    
+    addCube(scene, { x: 3, y: 0.5, z: 1 }, { x: 0, y: 45, z: 0 });
+    addCube(scene, { x: -3, y: 1, z: -3 }, { x: 45, y: 0, z: 45 });
     addPlane(scene);
 
     const controls = setupControls(camera, renderer, cube);

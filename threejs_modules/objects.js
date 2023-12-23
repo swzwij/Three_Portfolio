@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export function addCube(scene) 
+export function addCube(scene, position = { x: 0, y: 0.5, z: 0 }, rotation = { x: 0, y: 0, z: 0 }) 
 {
     const geometry = new THREE.BoxGeometry();
     const material = new THREE.MeshBasicMaterial({ color: 0x0059e8 });
@@ -9,7 +9,14 @@ export function addCube(scene)
     const cube = new THREE.Mesh(geometry, material);
 
     cube.rotation.y = 45 * (Math.PI / 180);
-    cube.position.y = 0.5;
+
+    cube.rotation.x = rotation.x * (Math.PI / 180);
+    cube.rotation.y = rotation.y * (Math.PI / 180);
+    cube.rotation.z = rotation.z * (Math.PI / 180);
+
+    cube.position.x = position.x;
+    cube.position.z = position.z;
+    cube.position.y = position.y;
 
     cube.castShadow = true;
     cube.receiveShadow = true;
