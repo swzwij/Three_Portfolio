@@ -6,7 +6,7 @@ import { addSceneLight } from './threejs_modules/light.js';
 import { addEmpty } from './threejs_modules/objects.js';
 import { animate } from './threejs_modules/animation.js';
 import { setupSkybox } from './threejs_modules/skybox.js';
-import { addSceneObjects } from './threejs_modules/scene.js';
+import { addSceneObjects, addSceneTest } from './threejs_modules/scene.js';
 
 export function init() 
 {
@@ -20,6 +20,7 @@ export function init()
     setupSkybox(scene, camera);
 
     addSceneObjects(scene);
+    //addSceneTest(scene);
 
     const focus = addEmpty(scene, { x: 0, y: 3, z: 0 });
 

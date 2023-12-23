@@ -1,4 +1,4 @@
-export function animate(controls, renderer, scene, camera) 
+export function animate(controls, renderer, scene, camera, cubeCamera, plane) 
 {
     requestAnimationFrame(() => animate(controls, renderer, scene, camera));
     controls.update();
