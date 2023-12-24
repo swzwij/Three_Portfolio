@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { setupCamera } from './threejs_modules/camera.js';
+import { setupCamera, lockCamera, unlockCamera } from './threejs_modules/camera.js';
 import { setupRenderer } from './threejs_modules/renderer.js';
 import { setupControls } from './threejs_modules/controls.js';
 import { addSceneLight } from './threejs_modules/light.js';
@@ -9,6 +9,7 @@ import { setupSkybox } from './threejs_modules/skybox.js';
 import { addSceneObjects, addSceneTest } from './threejs_modules/scene.js';
 
 let raycaster, mouse, camera, scene;
+let controls, focus;
 let arcade_machine_1, arcade_machine_2, arcade_machine_3;
 
 export function init() 
@@ -35,9 +36,9 @@ export function init()
 
 
 
-    const focus = addEmpty(scene, { x: 0, y: 3, z: 0 });
+    focus = addEmpty(scene, { x: 0, y: 3, z: 0 });
 
-    const controls = setupControls(camera, renderer, focus);
+    controls = setupControls(camera, renderer, focus);
 
     window.addEventListener('click', onMouseClick, false);
 
@@ -56,17 +57,17 @@ function onMouseClick(event) {
     {
         if (intersects[i].object === arcade_machine_1) 
         {
-            console.log('Machine 1 was clicked');
+            lockCamera(camera, controls, { x: -3, y: 2.75, z: 1.5 }, { x: -4, y: 2.75, z: 1.5 })
         }
 
         if (intersects[i].object === arcade_machine_2) 
         {
-            console.log('Machine 2 was clicked');
+            lockCamera(camera, controls, { x: -3, y: 2.75, z: -1.5 }, { x: -4, y: 2.75, z: -1.5 })
         }
 
         if (intersects[i].object === arcade_machine_3) 
         {
-            console.log('Machine 3 was clicked');
+            unlockCamera(camera, controls, focus);
         }
     }
 } 
