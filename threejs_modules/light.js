@@ -4,7 +4,6 @@ import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHel
 export function addSceneLight(scene)
 {
     const ambientLight = new THREE.AmbientLight( 0x404040 );
-    ambientLight.castShadow = true;
     scene.add(ambientLight);
 }
 
