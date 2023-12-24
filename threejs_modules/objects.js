@@ -57,6 +57,7 @@ export function addFBX(scene, path, position = { x: 0, y: 0, z: 0 }, scale = 0.0
         });
 
         scene.add(object);
+        return object;
     });
 }
 
@@ -84,6 +85,21 @@ export function addLamp(scene, position, rotation, intensity, color = 0xf5ab00)
     //roomPart(scene, 'models/lamp/base.fbx', 0xcccccc, 0, 1, false, 0.005, position, rotation);
     roomPart(scene, 'models/lamp/lamp.fbx', color, 0, 1, true, 0.005, position, rotation);
     addPointLight(scene, position, color, intensity);
+}
+
+export function addClickBox(scene, position, rotation, scale, visible)
+{
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const box = new THREE.Mesh(geometry, material);
+
+    applyTransformations(box, position, rotation)
+    box.scale.set(scale.x, scale.y, scale.z);
+
+    box.material.visible = visible;
+
+    scene.add(box);
+    return box;
 }
 
 function roomPart(scene, path, color, metalness = 0, roughness = 1, emissive, scale = 0.01, position = { x: 0, y: 0, z: 0 }, rotation = { x: 0, y: 0, z: 0 })

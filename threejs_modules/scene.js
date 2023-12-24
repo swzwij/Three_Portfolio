@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import { addAreaLight, addPointLight, addSceneLight, addSpotLight } from './light.js';
 import { addCube, addFBX, addLamp, addPlane, addRoom } from './objects.js';
 
