@@ -11,6 +11,7 @@ import { addSceneObjects, addSceneTest } from './threejs_modules/scene.js';
 export function init() 
 {
     const scene = new THREE.Scene();
+    scene.fog = new THREE.Fog( 0x000000, 50, 100 );
 
     const camera = setupCamera();
     const renderer = setupRenderer();
@@ -21,6 +22,8 @@ export function init()
 
     addSceneObjects(scene);
     //addSceneTest(scene);
+
+
 
     const focus = addEmpty(scene, { x: 0, y: 3, z: 0 });
 
