@@ -7,10 +7,12 @@ import { addClickBox, addCube, addEmpty } from './threejs_modules/objects.js';
 import { animate } from './threejs_modules/animation.js';
 import { setupSkybox } from './threejs_modules/skybox.js';
 import { addSceneObjects, addSceneTest } from './threejs_modules/scene.js';
+import { addText } from './threejs_modules/Text.js';
+
 
 let raycaster, mouse, camera, scene;
 let controls, focus;
-let arcade_machine_1, arcade_machine_2, arcade_machine_3;
+let arcade_machine_1, arcade_machine_2, arcade_machine_3, title;
 
 export function init() 
 {
@@ -23,6 +25,9 @@ export function init()
     arcade_machine_1 = addClickBox(scene, { x: -3, y: 2, z: 1.5 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
     arcade_machine_2 = addClickBox(scene, { x: -3, y: 2, z: -1.5 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
     arcade_machine_3 = addClickBox(scene, { x: 1.5, y: 2, z: -3 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
+    
+    title = addClickBox(scene, { x: 0, y: 8.75, z: -4.65 }, { x: 0, y: 0, z: 0 }, { x: 8, y: 1.75, z: 2 }, false);
+
 
     camera = setupCamera();
     const renderer = setupRenderer();
@@ -34,8 +39,11 @@ export function init()
     addSceneObjects(scene);
     //addSceneTest(scene);
 
-
-
+    addText(scene, "Samuel Zwijsen", { x: -4.65, y: 8.25, z: 4.65 }, { x: 0, y: 90, z: 0 }, 80, 0xffffff);
+    addText(scene, "Game", { x: -4, y: 8.9, z: -4.65 }, { x: 0, y: 0, z: 0 }, 45, 0xffffff);
+    addText(scene, "Backend", { x: -4, y: 8.25, z: -4.65 }, { x: 0, y: 0, z: 0 }, 45, 0xffffff);
+    addText(scene, "Developer", { x: -1.25, y: 8.25, z: -4.65 }, { x: 0, y: 0, z: 0 }, 80, 0xffffff);
+    
     focus = addEmpty(scene, { x: 0, y: 3, z: 0 });
 
     controls = setupControls(camera, renderer, focus);
@@ -68,6 +76,11 @@ function onMouseClick(event) {
         if (intersects[i].object === arcade_machine_3) 
         {
             unlockCamera(camera, controls, focus);
+        }
+
+        if(intersects[i].object === title)
+        {
+            lockCamera(camera, controls, { x: 0, y: 8.75, z: -4.65 }, { x: 0, y: 8.75, z: -5.65 })
         }
     }
 } 
