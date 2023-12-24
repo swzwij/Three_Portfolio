@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from './node_modules/three/build/three.module.js';
 import { setupCamera, lockCamera, unlockCamera } from './threejs_modules/camera.js';
 import { setupRenderer } from './threejs_modules/renderer.js';
 import { setupControls } from './threejs_modules/controls.js';
@@ -7,7 +7,7 @@ import { addClickBox, addCube, addEmpty } from './threejs_modules/objects.js';
 import { animate } from './threejs_modules/animation.js';
 import { setupSkybox } from './threejs_modules/skybox.js';
 import { addSceneObjects, addSceneTest } from './threejs_modules/scene.js';
-import { addText } from './threejs_modules/Text.js';
+import { addText } from './threejs_modules/text.js';
 
 
 let raycaster, mouse, camera, scene;

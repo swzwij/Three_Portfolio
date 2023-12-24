@@ -3,11 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="./icons/pfp.png">
         <title>Samuel Zwijsen</title>
     </head>
 
     <body>
         <div id="start">
+            <div id="icon"></div>
             <button id="start-button">Start</button>
         </div>
 
@@ -39,15 +41,36 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black
+    background-color: black;
+    flex-direction: column;
 }
+
+#icon {
+    width: 25rem;
+    height: 25rem;
+    background-image: url('./icons/pfp.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: spin 10s ease-in-out infinite;
+}   
 
 #start-button {
     background: none;
     border: none;
     color: white;
-    padding: 10px 20px;
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
     font-size: 3rem;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 </style>

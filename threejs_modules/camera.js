@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { lerpLookAt, lerpPosition } from './lerp';
 
 const cameraPosition = { x: 7.5, y: 5, z: 7.5 };
 
@@ -11,8 +12,11 @@ export function setupCamera()
 
 export function lockCamera(camera, controls, position, lookAt)
 {
-    camera.position.set(position.x, position.y, position.z);
-    controls.target.copy({x: lookAt.x, y: lookAt.y, z: lookAt.z});
+    //camera.position.set(position.x, position.y, position.z);
+
+    lerpPosition(camera, position, 0.01);
+    lerpLookAt(controls, lookAt, 0.01);
+    //controls.target.copy({x: lookAt.x, y: lookAt.y, z: lookAt.z});
 }
 
 export function unlockCamera(camera, controls, object)
