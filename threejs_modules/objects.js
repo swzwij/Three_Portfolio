@@ -23,7 +23,7 @@ export function addCube(scene, position = { x: 0, y: 0.5, z: 0 }, rotation = { x
 export function addPlane(scene, scale =10, position = 0) 
 {
     const geometry = new THREE.PlaneGeometry(scale, scale);
-    const material = new THREE.MeshStandardMaterial({ color: 0xbababa, metalness: .9, roughness: .5});
+    const material = new THREE.MeshStandardMaterial({ color: 0x252525, metalness: 0, roughness: 1});
     const plane = new THREE.Mesh(geometry, material);
 
     plane.rotation.x = -Math.PI / 2;
@@ -111,6 +111,7 @@ function roomPart(scene, path, color, metalness = 0, roughness = 1, emissive, sc
             }
         });
         scene.add(object);
+        return object;
     });
 }
 
