@@ -40,7 +40,7 @@ export function init()
     //addSceneTest(scene);
 
     addText(scene, "Samuel Zwijsen", { x: -4.65, y: 8.25, z: 4.65 }, { x: 0, y: 90, z: 0 }, 80, 0xffffff);
-    addText(scene, "Game", { x: -4, y: 8.9, z: -4.65 }, { x: 0, y: 0, z: 0 }, 45, 0xffffff);
+    addText(scene, "Game,", { x: -4, y: 8.9, z: -4.65 }, { x: 0, y: 0, z: 0 }, 45, 0xffffff);
     addText(scene, "Backend", { x: -4, y: 8.25, z: -4.65 }, { x: 0, y: 0, z: 0 }, 45, 0xffffff);
     addText(scene, "Developer", { x: -1.25, y: 8.25, z: -4.65 }, { x: 0, y: 0, z: 0 }, 80, 0xffffff);
     
