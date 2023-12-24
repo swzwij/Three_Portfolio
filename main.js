@@ -28,7 +28,7 @@ export function init()
     
     addSceneLight(scene);
 
-    setupSkybox(scene, camera);
+    //setupSkybox(scene, camera);
 
     addSceneObjects(scene);
     //addSceneTest(scene);
