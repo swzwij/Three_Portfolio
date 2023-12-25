@@ -3,22 +3,27 @@ export function lerpCamera(object, targetPosition, controls, targetControlsPosit
     const startPosition = object.position.clone();
     const startControlsTarget = controls.target.clone();
 
+    controls.enableRotate = false;
+    controls.enableZoom = false;
+
     let delta = 0;
     let animationFrameId;
 
-    function easeOutCubic(t) 
-    {
-        return 1 - Math.pow(1 - t, 3);
-    }
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
 
     function animate() 
     {
         delta += speed;
+
         if (delta >= 1) 
         {
             delta = 1;
             object.position.copy(targetPosition);
             controls.target.copy(targetControlsPosition);
+
+            // Re-enable user control of rotation and zoom
+            controls.enableRotate = true;
+            controls.enableZoom = true;
 
             // Stop the animation
             cancelAnimationFrame(animationFrameId);
@@ -29,13 +34,9 @@ export function lerpCamera(object, targetPosition, controls, targetControlsPosit
 
         const easedDelta = easeOutCubic(delta);
 
-        // Lerp the object's position
         object.position.copy(startPosition).lerp(targetPosition, easedDelta);
-
-        // Lerp the controls' target
         controls.target.copy(startControlsTarget).lerp(targetControlsPosition, easedDelta);
 
-        // Update controls
         controls.update();
     }
 
