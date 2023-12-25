@@ -8,6 +8,7 @@ import { animate } from './threejs_modules/animation.js';
 import { setupSkybox } from './threejs_modules/skybox.js';
 import { addSceneObjects, addSceneTest } from './threejs_modules/scene.js';
 import { addText } from './threejs_modules/text.js';
+import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 
 let raycaster, mouse, camera, scene;
 let controls, focus;
@@ -16,6 +17,7 @@ let arcade_machine_1, arcade_machine_2, arcade_machine_3, title;
 export function init() 
 {
     scene = new THREE.Scene();
+
     scene.fog = new THREE.Fog( 0x000000, 50, 100 );
 
     raycaster = new THREE.Raycaster();
@@ -43,15 +45,36 @@ export function init()
     addText(scene, "About Me", { x: -2.2, y: 3.9, z: -0.6 }, { x: 0, y: 90, z: 0 }, 30, 0xffffff);
     addText(scene, "Bonus", { x: 0.9, y: 3.9, z: -2.2 }, { x: 0, y: 0, z: 0 }, 30, 0xffffff);
 
-
     focus = addEmpty(scene, { x: 0, y: 3, z: 0 });
 
     controls = setupControls(camera, renderer, focus);
 
+    // Create an iframe to contain the HTML/CSS content
+    const iframe = document.createElement('iframe');
+    iframe.style.width = '360px';
+    iframe.style.height = '360px';
+    iframe.src = './sub-pages/projects.html';
+
+    // Create a CSS3DObject to hold the iframe
+    const cssObject = new CSS3DObject(iframe);
+    cssObject.position.set(-3, 2.5, 1.5);
+    cssObject.rotation.set(0, 90 * (Math.PI / 180), 0);
+    cssObject.scale.set(0.005, 0.005, 0.005);
+
+    // Add the CSS3DObject to the scene
+    scene.add(cssObject);
+
+    const cssRenderer = new CSS3DRenderer();
+    cssRenderer.setSize(window.innerWidth, window.innerHeight);
+    cssRenderer.domElement.style.position = 'absolute';
+    cssRenderer.domElement.style.top = 0;
+    cssRenderer.domElement.style.pointerEvents = 'none';
+    document.body.appendChild(cssRenderer.domElement);
+
     window.addEventListener('click', onMouseClick, false);
     window.addEventListener('keydown', onKeyDown, false);
 
-    animate(controls, renderer, scene, camera);
+    animate(controls, renderer, scene, camera, cssRenderer);
 }
 
 function onMouseClick(event) {
