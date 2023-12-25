@@ -18,14 +18,12 @@ export function lerpCamera(object, targetPosition, controls, targetControlsPosit
         if (delta >= 1) 
         {
             delta = 1;
-            object.position.copy(targetPosition);
             controls.target.copy(targetControlsPosition);
+            object.position.copy(targetPosition);
 
-            // Re-enable user control of rotation and zoom
             controls.enableRotate = true;
             controls.enableZoom = true;
 
-            // Stop the animation
             cancelAnimationFrame(animationFrameId);
             return;
         }
@@ -34,31 +32,11 @@ export function lerpCamera(object, targetPosition, controls, targetControlsPosit
 
         const easedDelta = easeOutCubic(delta);
 
-        object.position.copy(startPosition).lerp(targetPosition, easedDelta);
         controls.target.copy(startControlsTarget).lerp(targetControlsPosition, easedDelta);
+        object.position.copy(startPosition).lerp(targetPosition, easedDelta);
 
         controls.update();
     }
 
     animationFrameId = requestAnimationFrame(animate);
-}
-
-export function lerpLookAt(controls, target, speed)
-{
-    const startControlsTarget = controls.target;
-
-    controls.target.copy(startControlsTarget);
-
-    let delta = 0;
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        delta += speed;
-        delta = Math.min(delta, 1); 
-
-        controls.target.copy(startControlsTarget).lerp(target, delta);
-    }
-
-    animate();
 }

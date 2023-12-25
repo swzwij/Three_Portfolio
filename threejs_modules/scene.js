@@ -6,10 +6,10 @@ export function addSceneObjects(scene)
 {
     addPlane(scene, 250, -1.1);
 
-    addFBX(scene, 'models/arcade_machine.fbx', { x: -3, y: 0, z: -1.5 }, 0.01, { x: 0, y: 0, z: 0 }, 0x0059e8);
-    addFBX(scene, 'models/arcade_machine.fbx', { x: -3, y: 0, z: 1.5 }, 0.01, { x: 0, y: 0, z: 0 }, 0x0059e8);
+    addFBX(scene, 'models/arcade_machine.fbx', { x: -3.2, y: 0, z: -1.5 }, 0.01, { x: 0, y: 0, z: 0 }, 0x0059e8);
+    addFBX(scene, 'models/arcade_machine.fbx', { x: -3.2, y: 0, z: 1.5 }, 0.01, { x: 0, y: 0, z: 0 }, 0x0059e8);
     
-    addFBX(scene, 'models/arcade_machine.fbx', { x: 1.5, y: 0, z: -3 }, 0.01, { x: 0, y: 270, z: 0 }, 0x0059e8);
+    addFBX(scene, 'models/arcade_machine.fbx', { x: 1.5, y: 0, z: -3.2 }, 0.01, { x: 0, y: 270, z: 0 }, 0x0059e8);
     
     addFBX(scene, 'models/frame.fbx', { x: -4.5, y: 5.7, z: 0 }, 0.0075, { x: 0, y: 270, z: 0 }, 0x0059e8);
     addFBX(scene, 'models/frame.fbx', { x: -4.5, y: 6.2, z: 2 }, 0.0075, { x: 0, y: 270, z: 0 }, 0x0059e8);
