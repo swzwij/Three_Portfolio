@@ -56,6 +56,7 @@ export function addFBX(scene, path, position = { x: 0, y: 0, z: 0 }, scale = 0.0
             }
         });
 
+        object.layers.set(0);
         scene.add(object);
         return object;
     });
@@ -126,6 +127,7 @@ function roomPart(scene, path, color, metalness = 0, roughness = 1, emissive, sc
                 child.castShadow = true;
             }
         });
+        object.layers.set(0);
         scene.add(object);
         return object;
     });

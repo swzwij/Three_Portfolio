@@ -9,6 +9,8 @@ import { setupSkybox } from './threejs_modules/skybox.js';
 import { addSceneObjects, addSceneTest } from './threejs_modules/scene.js';
 import { addText } from './threejs_modules/text.js';
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
+import { setupCSSRenderer } from './threejs_modules/css-renderer.js';
+import { createIframe, CSSObject } from './threejs_modules/css-embed.js';
 
 let raycaster, mouse, camera, scene;
 let controls, focus;
@@ -30,6 +32,7 @@ export function init()
     title = addClickBox(scene, { x: 0, y: 8.75, z: -4.65 }, { x: 0, y: 0, z: 0 }, { x: 8, y: 1.75, z: 2 }, false);
 
     camera = setupCamera();
+    const cssRenderer = setupCSSRenderer();
     const renderer = setupRenderer();
     
     addSceneLight(scene);
@@ -49,27 +52,8 @@ export function init()
 
     controls = setupControls(camera, renderer, focus);
 
-    // Create an iframe to contain the HTML/CSS content
-    const iframe = document.createElement('iframe');
-    iframe.style.width = '360px';
-    iframe.style.height = '360px';
-    iframe.src = './sub-pages/projects.html';
-
-    // Create a CSS3DObject to hold the iframe
-    const cssObject = new CSS3DObject(iframe);
-    cssObject.position.set(-3, 2.5, 1.5);
-    cssObject.rotation.set(0, 90 * (Math.PI / 180), 0);
-    cssObject.scale.set(0.005, 0.005, 0.005);
-
-    // Add the CSS3DObject to the scene
-    scene.add(cssObject);
-
-    const cssRenderer = new CSS3DRenderer();
-    cssRenderer.setSize(window.innerWidth, window.innerHeight);
-    cssRenderer.domElement.style.position = 'absolute';
-    cssRenderer.domElement.style.top = 0;
-    cssRenderer.domElement.style.pointerEvents = 'none';
-    document.body.appendChild(cssRenderer.domElement);
+    const iframe = createIframe('./sub-pages/projects.html', '360px', '360px')
+    CSSObject(scene, iframe, { x: -3, y: 2.5, z: 1.5 }, { x: 0, y: 90 * (Math.PI / 180), z: 0 }, { x: 0.005, y: 0.005, z: 0.005 });
 
     window.addEventListener('click', onMouseClick, false);
     window.addEventListener('keydown', onKeyDown, false);
