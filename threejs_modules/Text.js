@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
-export function addText(scene, text, position, rotation, size, color)
+export function addText(scene, text, position, rotation, size, color, bevel = true, bevelThickness = .1, bevelSize = .5)
 {
     const loader = new FontLoader();
     loader.load('node_modules/three/examples/fonts/helvetiker_regular.typeface.json', function (font) 
@@ -13,9 +13,9 @@ export function addText(scene, text, position, rotation, size, color)
             size: size,
             height: 5,
             curveSegments: 12,
-            bevelEnabled: true,
-            bevelThickness: .1,
-            bevelSize: .5,
+            bevelEnabled: bevel,
+            bevelThickness: bevelThickness,
+            bevelSize: bevelSize,
             bevelOffset: 0,
             bevelSegments: 5
         });

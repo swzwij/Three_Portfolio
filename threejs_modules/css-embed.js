@@ -19,3 +19,16 @@ export function CSSObject(scene, iframe, position, rotation, scale)
     scene.add(cssObject);
     return cssObject;
 }
+
+export function CSSImage(scene, source, position, rotation, scale)
+{
+    const element = document.createElement('div');
+    element.innerHTML = `<img src="${source}">`;
+    const cssObject = new CSS3DObject(element);
+    cssObject.position.set(position.x, position.y, position.z);
+    cssObject.rotation.set(rotation.x, rotation.y, rotation.z);
+    cssObject.scale.set(scale.x, scale.y, scale.z);
+    cssObject.layers.set(1);
+    scene.add(cssObject);
+    return cssObject;
+}

@@ -10,7 +10,8 @@ import { addSceneObjects, addSceneTest } from './threejs_modules/scene.js';
 import { addText } from './threejs_modules/text.js';
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 import { setupCSSRenderer } from './threejs_modules/css-renderer.js';
-import { createIframe, CSSObject } from './threejs_modules/css-embed.js';
+import { createIframe, CSSImage, CSSObject } from './threejs_modules/css-embed.js';
+import { aboutMe } from './sub-pages/about-me.js';
 
 let raycaster, mouse, camera, scene;
 let controls, focus;
@@ -55,6 +56,10 @@ export function init()
     const iframe = createIframe('./sub-pages/projects.html', '360px', '360px')
     CSSObject(scene, iframe, { x: -3, y: 2.5, z: 1.5 }, { x: 0, y: 90 * (Math.PI / 180), z: 0 }, { x: 0.005, y: 0.005, z: 0.005 });
 
+    CSSImage(scene, './icons/pfp.png', { x: 0, y: 2.5, z: 0 }, { x: 0, y: 90 * (Math.PI / 180), z: 0 }, { x: 0.005, y: 0.005, z: 0.005 });
+
+    aboutMe(scene);
+
     window.addEventListener('click', onMouseClick, false);
     window.addEventListener('keydown', onKeyDown, false);
 
@@ -72,16 +77,24 @@ function onMouseClick(event) {
     for (let i = 0; i < intersects.length; i++) 
     {
         if (intersects[i].object === arcade_machine_1) 
-            lockCamera(camera, controls, { x: -3, y: 2.75, z: 1.5 }, { x: -4, y: 2.75, z: 1.5 })
+        {
+            lockCamera(camera, controls, { x: -3, y: 2.5, z: 1.5 }, { x: -7, y: 2.5, z: 1.5 })
+        }
 
         if (intersects[i].object === arcade_machine_2) 
-            lockCamera(camera, controls, { x: -3, y: 2.75, z: -1.5 }, { x: -4, y: 2.75, z: -1.5 })
+        {
+            lockCamera(camera, controls, { x: -3, y: 2.5, z: -1.5 }, { x: -7, y: 2.5, z: -1.5 })
+        }
 
         if (intersects[i].object === arcade_machine_3) 
-            lockCamera(camera, controls, { x: 1.5, y: 2.75, z: -3 }, { x: 1.5, y: 2.75, z: -4 })
+        {
+            lockCamera(camera, controls, { x: 1.5, y: 2.5, z: -3 }, { x: 1.5, y: 2.5, z: -7 })
+        }
 
         if (intersects[i].object === title)
+        {
             lockCamera(camera, controls, { x: 0, y: 8.75, z: -4.65 }, { x: 0, y: 8.75, z: -5.65 })
+        }
     }
 } 
 
