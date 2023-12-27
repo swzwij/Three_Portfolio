@@ -2,20 +2,30 @@ import * as THREE from 'three';
 import { addAreaLight, addPointLight, addSceneLight, addSpotLight } from './light.js';
 import { addCube, addFBX, addLamp, addPlane, addRoom } from './objects.js';
 
-export function addSceneObjects(scene, layer) 
+let scene;
+
+export const sceneInstance = () => scene;
+
+export function initScene()
 {
-    addPlane(scene, 250, -1.1);
+    scene = new THREE.Scene();
+    scene.fog = new THREE.Fog( 0x000000, 50, 100 );
+}
 
-    addFBX(scene, 'models/arcade_machine.fbx', { x: -3.2, y: 0, z: -1.5 }, 0.01, { x: 0, y: 0, z: 0 }, 0x0059e8);
-    addFBX(scene, 'models/arcade_machine.fbx', { x: -3.2, y: 0, z: 1.5 }, 0.01, { x: 0, y: 0, z: 0 }, 0x0059e8);
+export function addSceneObjects(scene2, layer) 
+{
+    addPlane(250, -1.1);
+
+    addFBX('models/arcade_machine.fbx', { x: -3.2, y: 0, z: -1.5 }, 0.01, { x: 0, y: 0, z: 0 }, 0x0059e8);
+    addFBX('models/arcade_machine.fbx', { x: -3.2, y: 0, z: 1.5 }, 0.01, { x: 0, y: 0, z: 0 }, 0x0059e8);
     
-    addFBX(scene, 'models/arcade_machine.fbx', { x: 1.5, y: 0, z: -3.2 }, 0.01, { x: 0, y: 270, z: 0 }, 0x0059e8);
+    addFBX('models/arcade_machine.fbx', { x: 1.5, y: 0, z: -3.2 }, 0.01, { x: 0, y: 270, z: 0 }, 0x0059e8);
         
-    addRoom(scene);
+    addRoom();
 
-    addPointLight(scene, { x: -2.5, y: 2.5, z: -1.5 }, 0xff0000, 1);
-    addPointLight(scene, { x: -2.5, y: 2.5, z: 1.5 }, 0x00ff00, 1);
-    addPointLight(scene, { x: 1.5, y: 2.5, z: -2.5 }, 0x0000ff, 1);
+    addPointLight({ x: -2.5, y: 2.5, z: -1.5 }, 0xff0000, 1);
+    addPointLight({ x: -2.5, y: 2.5, z: 1.5 }, 0x00ff00, 1);
+    addPointLight({ x: 1.5, y: 2.5, z: -2.5 }, 0x0000ff, 1);
 
     const wallLightIntensity = 10;
     const wallLightColor = 0xfff8ab;
@@ -31,26 +41,26 @@ export function addSceneObjects(scene, layer)
     // addLamp(scene, { x: -2, y: 6.25, z: -3.9 }, { x: 0, y: 0, z: 0 }, wallLightIntensity, wallLightColor);
 
     // Under lighting
-    addAreaLight(scene, 10, .5, 25, { x: 0, y: -.3, z: 5 }, { x: 0, y: -.3, z: 6 }, 0x0000ff);
-    addAreaLight(scene, 10, .5, 25, { x: 5, y: -.3, z: 0 }, { x: 6, y: -.3, z: 0 }, 0x0000ff);
+    addAreaLight(10, .5, 25, { x: 0, y: -.3, z: 5 }, { x: 0, y: -.3, z: 6 }, 0x0000ff);
+    addAreaLight(10, .5, 25, { x: 5, y: -.3, z: 0 }, { x: 6, y: -.3, z: 0 }, 0x0000ff);
     
     const stripeIntensity = 2;
 
     // Left stripe lighting
-    addAreaLight(scene, 1, 10.25, stripeIntensity, { x: -4.65, y: 3.25, z: 0 }, { x: -4.65, y: 0, z: 0 }, 0xffff00);
-    addAreaLight(scene, 1, 10.25, stripeIntensity, { x: -4.65, y: 3.25, z: 0 }, { x: -4.65, y: 3.5, z: 0 }, 0xffff00);
-    addAreaLight(scene, 1, 10.25, stripeIntensity, { x: -4.65, y: 2.75, z: 0 }, { x: -4.65, y: 0, z: 0 }, 0xffff00);
-    addAreaLight(scene, 1, 10.25, stripeIntensity, { x: -4.65, y: 2.75, z: 0 }, { x: -4.65, y: 3.5, z: 0 }, 0xffff00);
+    addAreaLight(1, 10.25, stripeIntensity, { x: -4.65, y: 3.25, z: 0 }, { x: -4.65, y: 0, z: 0 }, 0xffff00);
+    addAreaLight(1, 10.25, stripeIntensity, { x: -4.65, y: 3.25, z: 0 }, { x: -4.65, y: 3.5, z: 0 }, 0xffff00);
+    addAreaLight(1, 10.25, stripeIntensity, { x: -4.65, y: 2.75, z: 0 }, { x: -4.65, y: 0, z: 0 }, 0xffff00);
+    addAreaLight(1, 10.25, stripeIntensity, { x: -4.65, y: 2.75, z: 0 }, { x: -4.65, y: 3.5, z: 0 }, 0xffff00);
 
     // Right stripe lighting
-    addAreaLight(scene, 10.25, 1, stripeIntensity, { x: 0, y: 3.25, z: -4.65 }, { x: 0, y: 0, z: -4.65 }, 0xffff00);
-    addAreaLight(scene, 10.25, 1, stripeIntensity, { x: 0, y: 3.25, z: -4.65 }, { x: 0, y: 3.5, z: -4.65 }, 0xffff00);
-    addAreaLight(scene, 10.25, 1, stripeIntensity, { x: 0, y: 2.75, z: -4.65 }, { x: 0, y: 0, z: -4.65 }, 0xffff00);
-    addAreaLight(scene, 10.25, 1, stripeIntensity, { x: 0, y: 2.75, z: -4.65 }, { x: 0, y: 3.5, z: -4.65 }, 0xffff00);
+    addAreaLight(10.25, 1, stripeIntensity, { x: 0, y: 3.25, z: -4.65 }, { x: 0, y: 0, z: -4.65 }, 0xffff00);
+    addAreaLight(10.25, 1, stripeIntensity, { x: 0, y: 3.25, z: -4.65 }, { x: 0, y: 3.5, z: -4.65 }, 0xffff00);
+    addAreaLight(10.25, 1, stripeIntensity, { x: 0, y: 2.75, z: -4.65 }, { x: 0, y: 0, z: -4.65 }, 0xffff00);
+    addAreaLight(10.25, 1, stripeIntensity, { x: 0, y: 2.75, z: -4.65 }, { x: 0, y: 3.5, z: -4.65 }, 0xffff00);
     
     // Wall lighting
-    addAreaLight(scene, 10, .1, wallLightIntensity, { x: 0, y: 7, z: -4.25 }, { x: 0, y: 3.5, z: -4.25 }, wallLightColor);
-    addAreaLight(scene, .1, 10, wallLightIntensity, { x: -4.25, y: 7, z: 0 }, { x: -4.25, y: 3.5, z: 0 }, wallLightColor);
+    addAreaLight(10, .1, wallLightIntensity, { x: 0, y: 7, z: -4.25 }, { x: 0, y: 3.5, z: -4.25 }, wallLightColor);
+    addAreaLight(.1, 10, wallLightIntensity, { x: -4.25, y: 7, z: 0 }, { x: -4.25, y: 3.5, z: 0 }, wallLightColor);
 }
 
 export function addSceneTest(scene)

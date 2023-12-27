@@ -1,4 +1,5 @@
 import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
+import { sceneInstance } from './scene.js';
 
 export function createIframe(source, width, height)
 {
@@ -9,18 +10,18 @@ export function createIframe(source, width, height)
     return iframe;
 }
 
-export function CSSObject(scene, iframe, position, rotation, scale)
+export function CSSObject(iframe, position, rotation, scale)
 {
     const cssObject = new CSS3DObject(iframe);
     cssObject.position.set(position.x, position.y, position.z);
     cssObject.rotation.set(rotation.x, rotation.y, rotation.z);
     cssObject.scale.set(scale.x, scale.y, scale.z);
     cssObject.layers.set(1);
-    scene.add(cssObject);
+    sceneInstance().add(cssObject);
     return cssObject;
 }
 
-export function CSSImage(scene, source, position, rotation, scale)
+export function CSSImage(source, position, rotation, scale)
 {
     const element = document.createElement('div');
     element.innerHTML = `<img src="${source}">`;
@@ -29,6 +30,6 @@ export function CSSImage(scene, source, position, rotation, scale)
     cssObject.rotation.set(rotation.x, rotation.y, rotation.z);
     cssObject.scale.set(scale.x, scale.y, scale.z);
     cssObject.layers.set(1);
-    scene.add(cssObject);
+    sceneInstance().add(cssObject);
     return cssObject;
 }
