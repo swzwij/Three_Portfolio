@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { addPointLight } from './light';
-import { mainScene } from './scenes/mainScene';
+import { mainScene } from '../scenes/mainScene';
 
 export function addCube(position = { x: 0, y: 0.5, z: 0 }, rotation = { x: 0, y: 0, z: 0 })
 {

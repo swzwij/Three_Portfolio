@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { lerpCamera } from '../lerp';
+import { lerpCamera } from '../utils/lerp';
 import { controls } from './controls';
 
 let _camera;

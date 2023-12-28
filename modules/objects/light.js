@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js';
-import { mainScene } from './scenes/mainScene.js';
+import { mainScene } from '../scenes/mainScene.js';
 
 export function addSceneLight()
 {

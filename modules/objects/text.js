@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import { mainScene } from './scenes/mainScene';
+import { mainScene } from '../scenes/mainScene';
 
 export function addText(text, position, rotation, size, color, bevel = true, bevelThickness = .1, bevelSize = .5)
 {

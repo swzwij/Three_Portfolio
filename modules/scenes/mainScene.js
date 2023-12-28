@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import { addFBX, addPlane, addClickBox, addRoom } from '../objects';
-import { addPointLight } from '../light';
-import { addAreaLight } from '../light';
-import { addText } from '../text';
-import { CSSObject, createIframe } from '../cssEmbed';
+import { addFBX, addPlane, addClickBox, addRoom } from '../objects/objects';
+import { addPointLight } from '../objects/light';
+import { addAreaLight } from '../objects/light';
+import { addText } from '../objects/text';
+import { CSSObject, createIframe } from '../objects/cssEmbed';
 
 let scene;
 let machineInteractable_1, machineInteractable_2, machineInteractable_3;

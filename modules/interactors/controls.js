@@ -1,7 +1,7 @@
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { addEmpty } from '../objects.js';
+import { addEmpty } from '../objects/objects.js';
 import { camera } from './camera.js'
-import { renderer } from '../renderers.js';
+import { renderer } from '../rendering/renderers.js';
 
 let _controls;
 let _focus;
