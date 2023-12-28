@@ -1,5 +1,5 @@
-import { CSSImage, CSSObject } from "../threejs_modules/css-embed";
-import { addText } from '../threejs_modules/text.js';
+import { CSSImage, CSSObject } from "../modules/cssEmbed.js";
+import { addText } from '../modules/text.js';
 
 export function aboutMe()
 {

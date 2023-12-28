@@ -1,4 +1,4 @@
-export function lerpCamera(object, targetPosition, controls, targetControlsPosition, speed) 
+export function lerpCamera(object, targetPosition, controls, targetControlsPosition, speed)
 {
     const startPosition = object.position.clone();
     const startControlsTarget = controls.target.clone();
@@ -11,11 +11,11 @@ export function lerpCamera(object, targetPosition, controls, targetControlsPosit
 
     const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
 
-    function animate() 
+    function animate()
     {
         delta += speed;
 
-        if (delta >= 1) 
+        if (delta >= 1)
         {
             delta = 1;
             controls.target.copy(targetControlsPosition);

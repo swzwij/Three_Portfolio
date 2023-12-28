@@ -1,14 +1,14 @@
 import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import { sceneInstance } from './scene';
+import { mainScene } from './scenes/mainScene';
 
 export function addText(text, position, rotation, size, color, bevel = true, bevelThickness = .1, bevelSize = .5)
 {
     const loader = new FontLoader();
-    loader.load('node_modules/three/examples/fonts/helvetiker_regular.typeface.json', function (font) 
+    loader.load('node_modules/three/examples/fonts/helvetiker_regular.typeface.json', function (font)
     {
-        const textGeometry = new TextGeometry(text, 
+        const textGeometry = new TextGeometry(text,
         {
             font: font,
             size: size,
@@ -28,7 +28,7 @@ export function addText(text, position, rotation, size, color, bevel = true, bev
         textMesh.rotation.set(rotation.x * (Math.PI / 180), rotation.y * (Math.PI / 180), rotation.z * (Math.PI / 180));
         textMesh.scale.set(0.01, 0.01, 0.01);
 
-        sceneInstance().add(textMesh);
+        mainScene().add(textMesh);
         return textMesh;
     });
 }

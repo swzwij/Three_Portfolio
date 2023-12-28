@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { addPointLight } from './light';
-import { sceneInstance } from './scene';
+import { mainScene } from './scenes/mainScene';
 
-export function addCube(position = { x: 0, y: 0.5, z: 0 }, rotation = { x: 0, y: 0, z: 0 }) 
+export function addCube(position = { x: 0, y: 0.5, z: 0 }, rotation = { x: 0, y: 0, z: 0 })
 {
     const geometry = new THREE.BoxGeometry();
     const material = new THREE.MeshStandardMaterial({ color: 0x0059e8 });
@@ -16,12 +16,12 @@ export function addCube(position = { x: 0, y: 0.5, z: 0 }, rotation = { x: 0, y:
     cube.castShadow = true;
     cube.receiveShadow = true;
 
-    sceneInstance().add(cube);
-    
+    mainScene().add(cube);
+
     return cube;
 }
 
-export function addPlane(scale = 10, position = 0) 
+export function addPlane(scale = 10, position = 0)
 {
     const geometry = new THREE.PlaneGeometry(scale, scale);
     const material = new THREE.MeshStandardMaterial({ color: 0x252525, metalness: 0, roughness: 1});
@@ -32,24 +32,24 @@ export function addPlane(scale = 10, position = 0)
 
     plane.receiveShadow = true;
 
-    sceneInstance().add(plane);
+    mainScene().add(plane);
 
     return plane;
 }
 
-export function addFBX(path, position = { x: 0, y: 0, z: 0 }, scale = 0.01, rotation = { x: 0, y: 0, z: 0 }) 
+export function addFBX(path, position = { x: 0, y: 0, z: 0 }, rotation = { x: 0, y: 0, z: 0 }, scale = 0.01)
 {
     const loader = new FBXLoader();
-    loader.load(path, (object) => 
+    loader.load(path, (object) =>
     {
         applyTransformations(object, position, rotation);
         object.scale.set(scale, scale, scale);
         object.receiveShadow = true;
         object.castShadow = true;
 
-        object.traverse((child) => 
+        object.traverse((child) =>
         {
-            if (child.isMesh) 
+            if (child.isMesh)
             {
                 //child.material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
                 child.castShadow = true;
@@ -58,7 +58,7 @@ export function addFBX(path, position = { x: 0, y: 0, z: 0 }, scale = 0.01, rota
         });
 
         object.layers.set(0);
-        sceneInstance().add(object);
+        mainScene().add(object);
         return object;
     });
 }
@@ -68,12 +68,12 @@ export function addEmpty(position)
     const object = new THREE.Object3D();
     applyTransformations(object, position);
 
-    sceneInstance().add(object);
+    mainScene().add(object);
     return object;
 }
 
 export function addRoom()
-{    
+{
     roomPart('models/room/base.fbx', 0x000000);
     roomPart('models/room/floor.fbx', 0x1c7eff);
     roomPart('models/room/black_tiles.fbx', 0x000000, 0.3, 0.3);
@@ -99,7 +99,7 @@ export function addClickBox(position, rotation, scale, visible)
 
     box.material.visible = visible;
 
-    sceneInstance().add(box);
+    mainScene().add(box);
     return box;
 }
 
@@ -107,7 +107,7 @@ function roomPart(path, color, metalness = 0, roughness = 1, emissive, scale = 0
 {
     const loader = new FBXLoader();
 
-    loader.load(path, (object) => 
+    loader.load(path, (object) =>
     {
         applyTransformations(object, position, rotation);
         object.scale.set(scale, scale, scale);
@@ -115,9 +115,9 @@ function roomPart(path, color, metalness = 0, roughness = 1, emissive, scale = 0
             object.receiveShadow = true;
         object.castShadow = true;
 
-        object.traverse((child) => 
+        object.traverse((child) =>
         {
-            if (child.isMesh) 
+            if (child.isMesh)
             {
                 child.material = new THREE.MeshStandardMaterial({ color: color, metalness: metalness, roughness: roughness });
                 if(emissive)
@@ -128,12 +128,12 @@ function roomPart(path, color, metalness = 0, roughness = 1, emissive, scale = 0
             }
         });
         object.layers.set(0);
-        sceneInstance().add(object);
+        mainScene().add(object);
         return object;
     });
 }
 
-function applyTransformations(object, position, rotation = { x: 0, y: 0, z: 0 }) 
+function applyTransformations(object, position, rotation = { x: 0, y: 0, z: 0 })
 {
     object.rotation.x = rotation.x * (Math.PI / 180);
     object.rotation.y = rotation.y * (Math.PI / 180);
