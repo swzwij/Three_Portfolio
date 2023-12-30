@@ -1,17 +1,17 @@
 import * as THREE from 'three';
-import { addFBX, addPlane, addClickBox, addRoom } from '../objects/objects';
+import { addFBX, addPlane, addClickable, addRoom } from '../objects/objects';
 import { addPointLight } from '../objects/light';
 import { addAreaLight } from '../objects/light';
 import { addText } from '../objects/text';
 import { CSSObject, createIframe } from '../objects/cssEmbed';
+import { focusObject } from '../objects/focusObject';
 
 let scene;
 let machineInteractable_1, machineInteractable_2, machineInteractable_3;
 let titleInteractable;
 
 export const mainScene = () => scene;
-export const machineInteractables = () => [machineInteractable_1, machineInteractable_2, machineInteractable_3];
-export const titleInteractables = () => [titleInteractable];
+export const interactableInstances = () => [machineInteractable_1, machineInteractable_2, machineInteractable_3, titleInteractable];
 
 export function initScene()
 {
@@ -104,9 +104,15 @@ function nameText()
 
 function interactables()
 {
-    machineInteractable_1 = addClickBox({ x: -3, y: 2, z: 1.5 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
-    machineInteractable_2 = addClickBox({ x: -3, y: 2, z: -1.5 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
-    machineInteractable_3 = addClickBox({ x: 1.5, y: 2, z: -3 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
+    const machineClickable_1 = addClickable({ x: -3, y: 2, z: 1.5 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
+    machineInteractable_1 = new focusObject({ x: -3, y: 2.5, z: 1.5 }, { x: -7, y: 2.5, z: 1.5 }, machineClickable_1);
 
-    titleInteractable = addClickBox({ x: 0, y: 8.75, z: -4.65 }, { x: 0, y: 0, z: 0 }, { x: 8, y: 1.75, z: 2 }, false);
+    const machineClickable_2 = addClickable({ x: -3, y: 2, z: -1.5 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
+    machineInteractable_2 = new focusObject({ x: -3, y: 2.5, z: -1.5 }, { x: -7, y: 2.5, z: -1.5 }, machineClickable_2);
+
+    const machineClickable_3 = addClickable({ x: 1.5, y: 2, z: -3 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
+    machineInteractable_3 = new focusObject({ x: 1.5, y: 2.5, z: -3 }, { x: 1.5, y: 2.5, z: -7 }, machineClickable_3);
+
+    const titleClickable = addClickable({ x: 0, y: 8.75, z: -4.65 }, { x: 0, y: 0, z: 0 }, { x: 8, y: 1.75, z: 2 }, false);
+    titleInteractable = new focusObject({ x: 0, y: 8.75, z: -4.65 }, { x: 0, y: 8.75, z: -5.65 }, titleClickable);
 }

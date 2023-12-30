@@ -1,4 +1,4 @@
-export function lerpCamera(object, targetPosition, controls, targetControlsPosition, speed)
+export function lerpCamera(object, targetPosition, controls, targetControlsPosition, speed, canRotate)
 {
     const startPosition = object.position.clone();
     const startControlsTarget = controls.target.clone();
@@ -21,7 +21,7 @@ export function lerpCamera(object, targetPosition, controls, targetControlsPosit
             controls.target.copy(targetControlsPosition);
             object.position.copy(targetPosition);
 
-            controls.enableRotate = true;
+            controls.enableRotate = canRotate;
             controls.enableZoom = true;
 
             cancelAnimationFrame(animationFrameId);

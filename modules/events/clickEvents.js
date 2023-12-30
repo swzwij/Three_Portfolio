@@ -1,7 +1,6 @@
 import { mouse, raycaster } from '../interactors/mouseInteraction.js';
 import { camera, lockCamera } from '../interactors/camera.js';
-import { controls } from '../interactors/controls.js';
-import { mainScene, machineInteractables, titleInteractables} from '../scenes/mainScene.js';
+import { mainScene, interactableInstances} from '../scenes/mainScene.js';
 
 export function initClickEvents()
 {
@@ -17,27 +16,24 @@ function onMouseClick(event)
 
     const intersects = raycaster().intersectObjects(mainScene().children);
 
-    // TODO: Refactor this to be more generic
     for (let i = 0; i < intersects.length; i++)
     {
-        if (intersects[i].object === machineInteractables()[0])
+        for (let j = 0; j < interactableInstances().length; j++)
         {
-            lockCamera({ x: -3, y: 2.5, z: 1.5 }, { x: -7, y: 2.5, z: 1.5 })
-        }
+            const interactable = interactableInstances()[j];
+            if (intersects[i].object === interactable.clickable())
+            {
+                if (!interactable.isClickable())
+                {
+                    continue;
+                }
 
-        if (intersects[i].object === machineInteractables()[1])
-        {
-            lockCamera({ x: -3, y: 2.5, z: -1.5 }, { x: -7, y: 2.5, z: -1.5 })
-        }
+                lockCamera(interactable.cameraPosition(), interactable.cameraDirection());
 
-        if (intersects[i].object === machineInteractables()[2])
-        {
-            lockCamera({ x: 1.5, y: 2.5, z: -3 }, { x: 1.5, y: 2.5, z: -7 })
-        }
+                interactable.setClickable(false);
 
-        if (intersects[i].object === titleInteractables()[0])
-        {
-            lockCamera({ x: 0, y: 8.75, z: -4.65 }, { x: 0, y: 8.75, z: -5.65 })
+                console.log(intersects[i].object)
+            }
         }
     }
 }

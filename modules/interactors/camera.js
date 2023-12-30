@@ -15,10 +15,10 @@ export function initCamera()
 
 export function lockCamera(position, lookAt)
 {
-    lerpCamera(_camera, position, controls(), lookAt, 0.01);
+    lerpCamera(_camera, position, controls(), lookAt, 0.01, false);
 }
 
 export function unlockCamera(object)
 {
-    lerpCamera(_camera, cameraPosition, controls(), object.position, 0.01);
+    lerpCamera(_camera, cameraPosition, controls(), object.position, 0.01, true);
 }

@@ -88,7 +88,7 @@ export function addLamp(position, rotation, intensity, color = 0xf5ab00)
     addPointLight(position, color, intensity);
 }
 
-export function addClickBox(position, rotation, scale, visible)
+export function addClickable(position, rotation, scale, visible)
 {
     const geometry = new THREE.BoxGeometry();
     const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
