@@ -1,6 +1,6 @@
-import { mouse, raycaster } from '../interactors/mouseInteraction.js';
-import { camera, lockCamera } from '../interactors/camera.js';
 import { mainScene, interactableInstances} from '../scenes/mainScene.js';
+import { camera, lockCamera } from '../interactors/camera.js';
+import { raycaster } from '../interactors/mouseInteraction.js';
 
 export function initClickEvents()
 {
@@ -9,31 +9,24 @@ export function initClickEvents()
 
 function onMouseClick(event)
 {
-    mouse().x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse().y = - (event.clientY / window.innerHeight) * 2 + 1;
+    const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+    const mouseY = - (event.clientY / window.innerHeight) * 2 + 1;
 
-    raycaster().setFromCamera(mouse(), camera());
+    raycaster().setFromCamera({ x: mouseX, y: mouseY }, camera());
 
     const intersects = raycaster().intersectObjects(mainScene().children);
 
-    for (let i = 0; i < intersects.length; i++)
+    intersects.forEach(intersect =>
     {
-        for (let j = 0; j < interactableInstances().length; j++)
+        const interactables = interactableInstances();
+        interactables.forEach(interactable =>
         {
-            const interactable = interactableInstances()[j];
-            if (intersects[i].object === interactable.clickable())
+            if (intersect.object === interactable.clickable() && interactable.isClickable())
             {
-                if (!interactable.isClickable())
-                {
-                    continue;
-                }
-
                 lockCamera(interactable.cameraPosition(), interactable.cameraDirection());
-
                 interactable.setClickable(false);
-
-                console.log(intersects[i].object)
+                console.log(intersect.object);
             }
-        }
-    }
+        });
+    });
 }
