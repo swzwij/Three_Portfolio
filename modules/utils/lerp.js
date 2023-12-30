@@ -1,4 +1,4 @@
-export function lerpCamera(object, targetPosition, controls, targetControlsPosition, speed, canRotate)
+export function lerpCamera(object, targetPosition, controls, targetControlsPosition, duration, canRotate) 
 {
     const startPosition = object.position.clone();
     const startControlsTarget = controls.target.clone();
@@ -6,14 +6,16 @@ export function lerpCamera(object, targetPosition, controls, targetControlsPosit
     controls.enableRotate = false;
     controls.enableZoom = false;
 
-    let delta = 0;
+    let startTime = performance.now();
     let animationFrameId;
 
     const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
 
     function animate()
     {
-        delta += speed;
+        let currentTime = performance.now();
+        let elapsed = (currentTime - startTime) / 1000;
+        let delta = elapsed / duration;
 
         if (delta >= 1)
         {

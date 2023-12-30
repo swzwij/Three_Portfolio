@@ -13,12 +13,14 @@ export function initCamera()
     _camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
 }
 
+const lerpDuration = 1;
+
 export function lockCamera(position, lookAt)
 {
-    lerpCamera(_camera, position, controls(), lookAt, 0.01, false);
+    lerpCamera(_camera, position, controls(), lookAt, lerpDuration, false);
 }
 
 export function unlockCamera(object)
 {
-    lerpCamera(_camera, cameraPosition, controls(), object.position, 0.01, true);
+    lerpCamera(_camera, cameraPosition, controls(), object.position, lerpDuration, true);
 }
