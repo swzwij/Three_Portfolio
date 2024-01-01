@@ -4,6 +4,8 @@ export class focusObject
     _cameraDirection;
     _clickable;
     _isClickable = true;
+    _hasWebsite;
+    _website;
 
     constructor(cameraPosition, cameraDirection, clickable)
     {
@@ -21,4 +23,14 @@ export class focusObject
     isClickable = () => this._isClickable;
 
     setClickable = (clickable) => this._isClickable = clickable;
+
+    hasWebsite = () => this._hasWebsite;
+
+    website = () => this._website;
+
+    setWebsite = (website) =>
+    {
+        this._hasWebsite = true;
+        this._website = website;
+    }
 }

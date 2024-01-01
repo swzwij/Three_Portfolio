@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { addFBX, addPlane, addClickable, addRoom } from '../objects/objects';
+import { addFBX, addPlane, addClickable, addRoom, addMachine } from '../objects/objects';
 import { addPointLight } from '../objects/light';
 import { addAreaLight } from '../objects/light';
 import { addText } from '../objects/text';
@@ -9,6 +9,8 @@ import { focusObject } from '../objects/focusObject';
 let scene;
 let machineInteractable_1, machineInteractable_2, machineInteractable_3;
 let titleInteractable;
+
+let websiteArcadeMachine_1;
 
 export const mainScene = () => scene;
 export const interactableInstances = () => [machineInteractable_1, machineInteractable_2, machineInteractable_3, titleInteractable];
@@ -38,23 +40,27 @@ function ground()
 
 function interior()
 {
-    // Arcade machines
-    addFBX('models/arcade_machine.fbx', { x: -3.2, y: 0, z: -1.5 });
-    addFBX('models/arcade_machine.fbx', { x: -3.2, y: 0, z: 1.5 });
-    addFBX('models/arcade_machine.fbx', { x: 1.5, y: 0, z: -3.2 }, {x: 0, y: 270, z: 0});
+
+    // ddFBX('models/arcade_machine.fbx', { x: -3.2, y: 0, z: -1.5 });
+    // addFBX('models/arcade_machine.fbx', { x: -3.2, y: 0, z: 1.5 });
+    // addFBX('models/arcade_machine.fbx', { x: 1.5, y: 0, z: -3.2 }, {x: 0, y: 270, z: 0});
+
+    addMachine({ x: -3.25, y: 0, z: 1.25 }, { x: 0, y: 0, z: 0 }, 0x0000ff);
+    addMachine({ x: -2, y: 0, z: -2 }, { x: 0, y: 315, z: 0 }, 0xff0000);
+    addMachine({ x: 1.25, y: 0, z: -3.25 }, { x: 0, y: 270, z: 0 }, 0x00ff00);
 
     // Arcade machine lights
-    addPointLight({ x: -2.5, y: 2.5, z: -1.5 }, 0xff0000, 1);
-    addPointLight({ x: -2.5, y: 2.5, z: 1.5 }, 0x00ff00, 1);
-    addPointLight({ x: 1.5, y: 2.5, z: -2.5 }, 0x0000ff, 1);
+    // addPointLight({ x: -2.5, y: 2.5, z: -1.5 }, 0xff0000, 1);
+    // addPointLight({ x: -2.5, y: 2.5, z: 1.5 }, 0x00ff00, 1);
+    // addPointLight({ x: 1.5, y: 2.5, z: -2.5 }, 0x0000ff, 1);
 
     // Arcade machine headers
-    addText("Projects", { x: -2.2, y: 3.9, z: 2.25 }, { x: 0, y: 90, z: 0 }, 30, 0xffffff);
-    addText("About Me", { x: -2.2, y: 3.9, z: -0.6 }, { x: 0, y: 90, z: 0 }, 30, 0xffffff);
-    addText("Bonus", { x: 0.9, y: 3.9, z: -2.2 }, { x: 0, y: 0, z: 0 }, 30, 0xffffff);
+    addText("Projects", { x: -2.4, y: 3.925, z: 2 }, { x: 0, y: 90, z: 0 }, 30, 0xffffff);
+    addText("About Me", { x: -2, y: 3.925, z: -0.7 }, { x: 0, y: 45, z: 0 }, 30, 0xffffff);
+    addText("Skills", { x: 0.8, y: 3.925, z: -2.4 }, { x: 0, y: 0, z: 0 }, 30, 0xffffff);
 
     // Arcade machine website
-    CSSObject
+    websiteArcadeMachine_1 = CSSObject
     (
         createIframe('./sub-pages/projects.html', '360px', '360px'),
         { x: -3, y: 2.5, z: 1.5 },
@@ -104,14 +110,18 @@ function nameText()
 
 function interactables()
 {
-    const machineClickable_1 = addClickable({ x: -3, y: 2, z: 1.5 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
-    machineInteractable_1 = new focusObject({ x: -3, y: 2.5, z: 1.5 }, { x: -7, y: 2.5, z: 1.5 }, machineClickable_1);
+    const scale = { x: 2.25, y: 4.5, z: 2.35 };
+    const helper = false;
 
-    const machineClickable_2 = addClickable({ x: -3, y: 2, z: -1.5 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
-    machineInteractable_2 = new focusObject({ x: -3, y: 2.5, z: -1.5 }, { x: -7, y: 2.5, z: -1.5 }, machineClickable_2);
+    const machineClickable_1 = addClickable({ x: -3, y: 2.25, z: 1.25 }, { x: 0, y: 0, z: 0 }, scale, helper);
+    machineInteractable_1 = new focusObject({ x: -3, y: 2.8, z: 1.25 }, { x: -6.5, y: 2.5, z: 1.25 }, machineClickable_1);
+    machineInteractable_1.setWebsite(websiteArcadeMachine_1);
 
-    const machineClickable_3 = addClickable({ x: 1.5, y: 2, z: -3 }, { x: 0, y: 0, z: 0 }, { x: 2, y: 4, z: 2 }, false);
-    machineInteractable_3 = new focusObject({ x: 1.5, y: 2.5, z: -3 }, { x: 1.5, y: 2.5, z: -7 }, machineClickable_3);
+    const machineClickable_2 = addClickable({ x: -1.9, y: 2.25, z: -1.9 }, { x: 0, y: 315, z: 0 }, scale, helper);
+    machineInteractable_2 = new focusObject({ x: -0.75, y: 2.85, z: -0.75 }, { x: -6.5, y: 2.5, z: -6.5 }, machineClickable_2);
+
+    const machineClickable_3 = addClickable({ x: 1.25, y: 2.25, z: -3 }, { x: 0, y: 270, z: 0 }, scale, helper);
+    machineInteractable_3 = new focusObject({ x: 1.25, y: 2.8, z: -3 }, { x: 1.25, y: 2.5, z: -6.5 }, machineClickable_3);
 
     const titleClickable = addClickable({ x: 0, y: 8.75, z: -4.65 }, { x: 0, y: 0, z: 0 }, { x: 8, y: 1.75, z: 2 }, false);
     titleInteractable = new focusObject({ x: 0, y: 8.75, z: -4.65 }, { x: 0, y: 8.75, z: -5.65 }, titleClickable);

@@ -1,4 +1,4 @@
-export function lerpCamera(object, targetPosition, controls, targetControlsPosition, duration, canRotate) 
+export function lerpCamera(object, targetPosition, controls, targetControlsPosition, duration, canRotate)
 {
     const startPosition = object.position.clone();
     const startControlsTarget = controls.target.clone();
@@ -41,4 +41,25 @@ export function lerpCamera(object, targetPosition, controls, targetControlsPosit
     }
 
     animationFrameId = requestAnimationFrame(animate);
+}
+
+export function fadeObject(mesh, startOpacity, endOpacity, duration)
+{
+    const startTime = performance.now();
+
+    function update()
+    {
+        const currentTime = performance.now();
+        const elapsed = currentTime - startTime;
+        const fraction = elapsed / duration;
+
+        mesh.material.opacity = THREE.MathUtils.lerp(startOpacity, endOpacity, fraction);
+
+        if (fraction < 1)
+        {
+            requestAnimationFrame(update);
+        }
+    }
+
+    update();
 }

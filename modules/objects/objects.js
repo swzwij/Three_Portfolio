@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { addPointLight } from './light';
 import { mainScene } from '../scenes/mainScene';
+import { addText } from './text';
 
 export function addCube(position = { x: 0, y: 0.5, z: 0 }, rotation = { x: 0, y: 0, z: 0 })
 {
@@ -80,6 +81,13 @@ export function addRoom()
     roomPart('models/room/white_tiles.fbx', 0xffffff, 0.3, 0.3);
     roomPart('models/room/wall.fbx', 0x1c7eff, .1, .9);
     roomPart('models/room/stripe.fbx', 0xffea00, 0, 1, true);
+}
+
+export function addMachine(position, rotation, color)
+{
+    roomPart('models/Machine/Machine.fbx', 0x2E4766, 0, 1, false, 0.0085, position, rotation);
+    roomPart('models/Machine/BackPanel.fbx', color, 0, 1, false, 0.0085, position, rotation);
+    roomPart('models/Machine/Screen.fbx', 0x000000, 0, 1, false, 0.0085, position, rotation);
 }
 
 export function addLamp(position, rotation, intensity, color = 0xf5ab00)

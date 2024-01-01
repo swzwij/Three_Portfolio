@@ -25,7 +25,14 @@ function onMouseClick(event)
             {
                 lockCamera(interactable.cameraPosition(), interactable.cameraDirection());
                 interactable.setClickable(false);
-                console.log(intersect.object);
+
+                console.log(interactable.hasWebsite());
+                console.log(interactable.website());
+
+                if (interactable.hasWebsite())
+                {
+                    interactable.website().visable = true;
+                }
             }
         });
     });

@@ -18,6 +18,8 @@ export function CSSObject(iframe, position, rotation, scale)
     cssObject.scale.set(scale.x, scale.y, scale.z);
     cssObject.layers.set(1);
     mainScene().add(cssObject);
+    cssObject.visible = false;
+    return cssObject;
 }
 
 export function CSSImage(source, position, rotation, scale)
