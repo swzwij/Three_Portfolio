@@ -18,7 +18,7 @@ export function CSSObject(iframe, position, rotation, scale)
     cssObject.scale.set(scale.x, scale.y, scale.z);
     cssObject.layers.set(1);
     mainScene().add(cssObject);
-    cssObject.visible = false;
+    cssObject.visible = true;
     return cssObject;
 }
 

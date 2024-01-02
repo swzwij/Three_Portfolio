@@ -10,7 +10,7 @@ let scene;
 let machineInteractable_1, machineInteractable_2, machineInteractable_3;
 let titleInteractable;
 
-let websiteArcadeMachine_1;
+let websiteArcadeMachine_1, websiteArcadeMachine_2, websiteArcadeMachine_3;
 
 export const mainScene = () => scene;
 export const interactableInstances = () => [machineInteractable_1, machineInteractable_2, machineInteractable_3, titleInteractable];
@@ -62,11 +62,38 @@ function interior()
     // Arcade machine website
     websiteArcadeMachine_1 = CSSObject
     (
-        createIframe('./sub-pages/projects.html', '360px', '360px'),
-        { x: -3, y: 2.5, z: 1.5 },
-        { x: 0, y: 90 * (Math.PI / 180), z: 0 },
-        { x: 0.005, y: 0.005, z: 0.005 }
+        createIframe('./sub-pages/projects.html', '2000px', '1600px'),
+        { x: -2.625, y: 2.8875, z: 1.25 },
+        { x: 0, y: 0, z: 0 },
+        { x: 0.001, y: 0.001, z: 1 }
     );
+
+    websiteArcadeMachine_1.rotation.order = 'YXZ';
+    websiteArcadeMachine_1.rotation.x = -10 * (Math.PI / 180);
+    websiteArcadeMachine_1.rotation.y = 90 * (Math.PI / 180);
+
+    websiteArcadeMachine_2 = CSSObject
+    (
+        createIframe('./sub-pages/about-me.html', '2000px', '1600px'),
+        { x: -1.55, y:2.8875, z: -1.55 },
+        { x: 0, y: 0, z: 0 },
+        { x: 0.001, y: 0.001, z: 1 }
+    );
+
+    websiteArcadeMachine_2.rotation.order = 'YXZ';
+    websiteArcadeMachine_2.rotation.x = -10 * (Math.PI / 180);
+    websiteArcadeMachine_2.rotation.y = 45 * (Math.PI / 180);
+
+    websiteArcadeMachine_3 = CSSObject
+    (
+        createIframe('./sub-pages/skills.html', '2000px', '1600px'),
+        { x: 1.25, y: 2.8875, z: -2.625 },
+        { x: 0, y: 0, z: 0 },
+        { x: 0.001, y: 0.001, z: 1 }
+    );
+
+    websiteArcadeMachine_3.rotation.order = 'YXZ';
+    websiteArcadeMachine_3.rotation.x = -10 * (Math.PI / 180);
 }
 
 function exterior()
