@@ -62,7 +62,7 @@ function interior()
     // Arcade machine website
     websiteArcadeMachine_1 = CSSObject
     (
-        createIframe('./sub-pages/projects.html', '2000px', '1600px'),
+        createIframe('./sub-pages/about-me.html', '2000px', '1600px'),
         { x: -2.625, y: 2.8875, z: 1.25 },
         { x: 0, y: 0, z: 0 },
         { x: 0.001, y: 0.001, z: 1 }
@@ -86,7 +86,7 @@ function interior()
 
     websiteArcadeMachine_3 = CSSObject
     (
-        createIframe('./sub-pages/skills.html', '2000px', '1600px'),
+        createIframe('./sub-pages/about-me.html', '2000px', '1600px'),
         { x: 1.25, y: 2.8875, z: -2.625 },
         { x: 0, y: 0, z: 0 },
         { x: 0.001, y: 0.001, z: 1 }

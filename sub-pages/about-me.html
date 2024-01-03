@@ -3,47 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            background-color: #111111;
-            color: #fff;
-            font-family: 'Roboto Mono', monospace;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.5s; /* Smooth transition for background color change */
+    <script type="module">
+        import { unlockCamera } from "../modules/interactors/camera.js";
+
+        function toggleBackgroundColor() {
+            unlockCamera();
+
+            // Existing code to toggle background color
+            var currentColor = document.body.style.backgroundColor;
+            if (currentColor === 'rgb(17, 17, 17)') {
+                document.body.style.backgroundColor = '#EEEEEE';
+            } else {
+                document.body.style.backgroundColor = '#111111';
+            }
         }
 
-        .header {
-            margin: 0;
-            padding: 0;
-        }
-
-        .title {
-            color: #fff;
-            text-align: center;
-            font-size: 5rem;
-        }
-
-        .about-me {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .about-me button {
-            background-color: #222222;
-            border-radius: 1rem;
-            padding: 1rem;
-            width: 50%;
-            height: 50%;
-            text-align: center;
-            font-size: 2.5rem;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-        }
-    </style>
+        window.toggleBackgroundColor = toggleBackgroundColor;
+    </script>
 </head>
 <body>
     <div class="header">
@@ -54,19 +30,47 @@
             <p>Toggle Background Color</p>
         </button>
     </div>
-
-    <script>
-        function toggleBackgroundColor() {
-            // Get the current background color
-            var currentColor = document.body.style.backgroundColor;
-
-            // Check if the current color is the first color, and switch to the second if it is
-            if (currentColor === 'rgb(17, 17, 17)') {
-                document.body.style.backgroundColor = '#EEEEEE'; // Change to your second color
-            } else {
-                document.body.style.backgroundColor = '#111111'; // Change back to your first color
-            }
-        }
-    </script>
 </body>
 </html>
+
+<style>
+body {
+    background-color: #111111;
+    color: #fff;
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s;
+
+    .header {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.title {
+    color: #fff;
+    text-align: center;
+    font-size: 5rem;
+}
+
+.about-me {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.about-me button {
+    background-color: #222222;
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    font-size: 2.5rem;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+</style>

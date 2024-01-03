@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { lerpCamera } from '../utils/lerp';
-import { controls } from './controls';
+import { controls, focus } from './controls';
 
 let _camera;
 let cameraPosition = { x: 7.5, y: 5, z: 7.5 };
@@ -9,7 +9,7 @@ export const camera = () => _camera;
 
 export function initCamera()
 {
-    _camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    _camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
     _camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
 }
 
@@ -22,5 +22,5 @@ export function lockCamera(position, lookAt)
 
 export function unlockCamera(object)
 {
-    lerpCamera(_camera, cameraPosition, controls(), object.position, lerpDuration, true);
+    lerpCamera(_camera, cameraPosition, controls(), focus().position, lerpDuration, true);
 }
